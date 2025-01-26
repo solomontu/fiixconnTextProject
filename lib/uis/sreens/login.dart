@@ -42,9 +42,7 @@ class _LoginState extends State<Login> {
               Expanded(
                 flex: 145,
                 child: CustomImageAsset(
-                  assetName: appMode == Brightness.dark
-                      ? Assets.appIconWhite
-                      : Assets.appIconBlue,
+                  assetName: Assets.appIconBlue,
                 ),
               ),
               Expanded(
