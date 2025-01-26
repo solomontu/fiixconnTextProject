@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
   bool obscureText = true;
   TextEditingController userNameCtr = TextEditingController();
   TextEditingController passwordCtr = TextEditingController();
-
+  final GlobalKey<FormState> logInformKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Brightness appMode = MediaQuery.of(context).platformBrightness;
@@ -35,9 +35,12 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: CustomBackButton(),
+              Padding(
+                padding:  EdgeInsets.only(top: 20.0.h),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: CustomBackButton(),
+                ),
               ),
               Expanded(
                 flex: 145,
@@ -51,6 +54,7 @@ class _LoginState extends State<Login> {
                   passwordCtr: passwordCtr,
                   userNameCtr: userNameCtr,
                   obscureText: obscureText,
+                  logInformKey: logInformKey,
                   suffixIcon: ObscureTextButton(
                     onTap: () {
                       obscureText = !obscureText;
@@ -76,24 +80,25 @@ class _LoginState extends State<Login> {
 }
 
 class LoginForm extends StatelessWidget {
-  LoginForm(
+  const LoginForm(
       {super.key,
-      this.obscureText,
-      this.suffixIcon,
-      required this.passwordCtr,
-      required this.userNameCtr});
+        this.obscureText,
+        this.suffixIcon,
+        required this.passwordCtr,
+        required this.logInformKey,
+        required this.userNameCtr});
 
   final TextEditingController userNameCtr;
   final TextEditingController passwordCtr;
   final bool? obscureText;
   final Widget? suffixIcon;
-  final _logInformKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> logInformKey;
 
   @override
   Widget build(BuildContext context) {
     Brightness brightness = MediaQuery.of(context).platformBrightness;
     return Form(
-        key: _logInformKey,
+        key: logInformKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -120,7 +125,7 @@ class LoginForm extends StatelessWidget {
                 title: Strings.login,
                 titleColor: colors.white,
                 onPressed: () {
-                  if (_logInformKey.currentState!.validate()) {
+                  if (logInformKey.currentState!.validate()) {
                     as.routerService.getOffAll(Routes.home);
                   }
                 },
@@ -143,11 +148,11 @@ class LoginForm extends StatelessWidget {
 class CustomTextInput extends StatelessWidget {
   const CustomTextInput(
       {super.key,
-      required this.label,
-      this.validator,
-      this.controller,
-      this.obscureText,
-      this.suffixIcon});
+        required this.label,
+        this.validator,
+        this.controller,
+        this.obscureText,
+        this.suffixIcon});
 
   final String label;
   final String? Function(String?)? validator;

@@ -4,7 +4,6 @@ import '../app_constants/global_variables.dart';
 
 class AppThemeData {
   static ThemeData themeDataLight = ThemeData(
-    brightness: Brightness.light,
     fontFamily: 'Lato',
     scaffoldBackgroundColor: colors.white,
     primaryColor: colors.primaryColor,
