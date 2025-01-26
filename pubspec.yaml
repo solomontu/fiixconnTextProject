@@ -38,7 +38,7 @@ flutter_native_splash:
   web: false
 
   android_12:
-    image: "assets/images/app_icon_white.png"
+    image: "assets/images/Splash.png"
     #   Background image not supported on Android 12 and later
     #    background_image: "aassets/images/Splash.png"
     color: "#87CEEB"
